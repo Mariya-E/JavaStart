@@ -22,7 +22,7 @@ public class GuessNumber {
 
     private void init() {
         Random rand = new Random();
-        secretNumber = rand.nextInt(100);
+        secretNumber = rand.nextInt(100) + 1;
         scan = new Scanner(System.in);
         nullifyAttempts(playerOne);
         nullifyAttempts(playerTwo);
@@ -41,7 +41,9 @@ public class GuessNumber {
         System.out.println("У каждого игрока по 10 попыток!");
         tryToGuess();
         printNumbers(playerOne);
+        System.out.println();
         printNumbers(playerTwo);
+        System.out.println();
     }
 
     private void tryToGuess() {
@@ -64,11 +66,10 @@ public class GuessNumber {
         String name = player.getName();
         System.out.println(name + ", введите число, загаданное компьютером");
         int number = scan.nextInt();
-        player.getNumbers()[player.getAttempts()] = number;
+        player.setNumber(number);
         player.setAttempts(player.getAttempts() + 1);
         if (number == secretNumber) {
-            System.out.println("Поздравляем! " + name + " угадал число с" +
-                    player.getAttempts() + " попытки");
+            System.out.println("Поздравляем! " + name + " угадал число с " + player.getAttempts() + " попытки");
             return true;
         } else if (number > secretNumber) {
             System.out.println("Данное число больше того, что загадал компьютер");
@@ -79,12 +80,15 @@ public class GuessNumber {
         if (player.getAttempts() == 10) {
             System.out.println("У " + name + " закончились попытки");
         }
+
         return false;
     }
 
     private void printNumbers(Player player) {
         int[] numbers = player.getNumbers();
         int[] filledNumbers = Arrays.copyOf(numbers, player.getAttempts());
-        System.out.println(Arrays.toString(filledNumbers));
+        for (int filledNumber : filledNumbers) {
+            System.out.print(filledNumber + " ");
+        }
     }
 }

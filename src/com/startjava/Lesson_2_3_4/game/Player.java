@@ -1,7 +1,9 @@
 package com.startjava.Lesson_2_3_4.game;
 
+import java.util.Arrays;
+
 public class Player {
-    public String name;
+    private String name;
     private int attempts;
     private int[] numbers;
 
@@ -15,11 +17,11 @@ public class Player {
     }
 
     public int[] getNumbers() {
-        return numbers;
+        return Arrays.copyOf(numbers, numbers.length);
     }
 
-    public void setNumbers(int[]  numbers) {
-        this.numbers = numbers;
+    public void setNumber(int number) {
+        numbers[attempts] = number;
     }
 
     public int getAttempts() {
