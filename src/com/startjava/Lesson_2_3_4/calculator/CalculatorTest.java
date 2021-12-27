@@ -10,11 +10,8 @@ public class CalculatorTest {
         do {
             System.out.println("Введите математическое выражение: ");
             String expression = scanner.nextLine();
-            String[] array = expression.split(" ");
-            int firstNumber = Integer.parseInt(array[0]);
-            int secondNumber = Integer.parseInt(array[2]);
 
-            System.out.println(Calculator.calculate(firstNumber, array[1], secondNumber));
+            System.out.println(Calculator.calculate(expression));
 
             while (true) {
                 System.out.println("Хотите продолжить вычисления? [yes/no]:");
