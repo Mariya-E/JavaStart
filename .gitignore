@@ -1,3 +1,6 @@
 # Package Files #
 out/
 .idea/
+
+# IntelliJ
+*.iml
