@@ -6,6 +6,7 @@ public class Player {
     private String name;
     private int attempts;
     private int[] numbers;
+    private Player player;
 
     public Player(String name) {
         this.name = name;
@@ -17,7 +18,7 @@ public class Player {
     }
 
     public int[] getNumbers() {
-        return Arrays.copyOf(numbers, numbers.length);
+        return Arrays.copyOf(numbers, attempts);
     }
 
     public void setNumber(int number) {
@@ -30,5 +31,12 @@ public class Player {
 
     public void setAttempts(int attempts) {
         this.attempts = attempts;
+    }
+
+    public void clearNambers() {
+        if (attempts > 0) {
+            Arrays.fill(numbers, 0, attempts - 1, 0);
+            attempts = 0;
+        }
     }
 }

@@ -17,33 +17,22 @@ public class GuessNumber {
 
     public void launch() {
         init();
-        startGuessing();
+        startGameplay();
     }
 
     private void init() {
         Random rand = new Random();
         secretNumber = rand.nextInt(100) + 1;
         scan = new Scanner(System.in);
-        nullifyAttempts(playerOne);
-        nullifyAttempts(playerTwo);
+        playerOne.clearNambers();
+        playerTwo.clearNambers();
     }
 
-    private void nullifyAttempts(Player player) {
-        int attempts = player.getAttempts();
-        if (attempts > 0) {
-            int[] numbers = player.getNumbers();
-            Arrays.fill(numbers, 0, attempts - 1, 0);
-        }
-        player.setAttempts(0);
-    }
-
-    private void startGuessing() {
+    private void startGameplay() {
         System.out.println("У каждого игрока по 10 попыток!");
         tryToGuess();
         printNumbers(playerOne);
-        System.out.println();
         printNumbers(playerTwo);
-        System.out.println();
     }
 
     private void tryToGuess() {
@@ -54,9 +43,7 @@ public class GuessNumber {
             if (isGuessed(playerTwo)) {
                 break;
             }
-            int playerOneAttempts = playerOne.getAttempts();
-            int playerTwoAttempts = playerTwo.getAttempts();
-            if (playerOneAttempts == 10 || playerTwoAttempts == 10) {
+            if (playerOne.getAttempts() == 10 || playerTwo.getAttempts() == 10) {
                 break;
             }
         }
@@ -71,7 +58,8 @@ public class GuessNumber {
         if (number == secretNumber) {
             System.out.println("Поздравляем! " + name + " угадал число с " + player.getAttempts() + " попытки");
             return true;
-        } else if (number > secretNumber) {
+        }
+        if (number > secretNumber) {
             System.out.println("Данное число больше того, что загадал компьютер");
         } else {
             System.out.println("Данное число меньше того, что загадал компьютер");
@@ -80,15 +68,14 @@ public class GuessNumber {
         if (player.getAttempts() == 10) {
             System.out.println("У " + name + " закончились попытки");
         }
-
         return false;
     }
 
     private void printNumbers(Player player) {
         int[] numbers = player.getNumbers();
-        int[] filledNumbers = Arrays.copyOf(numbers, player.getAttempts());
-        for (int filledNumber : filledNumbers) {
-            System.out.print(filledNumber + " ");
+        for (int number : numbers) {
+            System.out.print(number + " ");
         }
+        System.out.println();
     }
 }
